@@ -1,6 +1,6 @@
 # gantt-task-react
 
-## Interactive Gantt Chart for React with TypeScript.
+## Interactive Gantt Chart for React with TypeScript. IPM Version
 
 A highly customizable and interactive Gantt chart component for React with TypeScript support. This repository
 integrates features and enhancements from the
