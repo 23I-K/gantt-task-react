@@ -188,7 +188,6 @@ const TaskGanttInner: React.FC<TaskGanttProps> = (props) => {
       dir="ltr"
     >
       <Calendar {...calendarProps} colors={colors} />
-
       <div
         ref={ganttTaskContentRef}
         className={styles.ganttTaskContent}
@@ -202,9 +201,6 @@ const TaskGanttInner: React.FC<TaskGanttProps> = (props) => {
             height={ganttFullHeight}
             fontFamily={barProps.fontFamily}
             ref={ganttSVGRef}
-            style={{
-              background: colors.oddTaskBackgroundColor
-            }}
           >
             <Grid {...gridProps} />
             <TaskGanttContent

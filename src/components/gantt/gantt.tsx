@@ -1923,7 +1923,7 @@ export const Gantt: React.FC<GanttProps> = ({
     onExpandAll
   };
 
-  const displayTable = !columnsProp || columnsProp.length > 0;
+  const displayTable = columnsProp?.length > 0;
   return (
     <div
       className={styles.wrapper}
