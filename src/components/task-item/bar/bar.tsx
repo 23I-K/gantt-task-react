@@ -33,9 +33,12 @@ export const Bar: React.FC<
   taskHalfHeight,
   taskHeight,
   taskYOffset,
+  taskY2Offset,
   width,
+  width2,
   x1,
   x2,
+  x2_1,
 }) => {
   const startMoveFullTask = useCallback(
     (clientX: number) => {
@@ -98,8 +101,11 @@ export const Bar: React.FC<
       <BarDisplay
         taskName={task.name}
         x={x1}
+        x2={x2_1}
         y={taskYOffset}
+        y2={taskY2Offset}
         width={width}
+        width2={width2}
         height={taskHeight}
         progressX={progressX}
         progressWidth={progressWidth}

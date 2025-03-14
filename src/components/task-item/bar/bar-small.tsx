@@ -14,7 +14,7 @@ export const BarSmall: React.FC<
 > = ({
   children: relationhandles,
   colorStyles,
-  distances: { barCornerRadius, handleWidth },
+  distances: { barCornerRadius, handleWidth, handleWidth2 },
   hasChildren,
   isSelected,
   isCritical,
@@ -23,9 +23,11 @@ export const BarSmall: React.FC<
   progressWidth,
   progressX,
   taskYOffset,
+  taskY2Offset,
   task,
   taskHeight,
   x1,
+  x2,
 }) => {
   const startMoveFullTask = useCallback(
     (clientX: number) => {
@@ -58,8 +60,11 @@ export const BarSmall: React.FC<
         startMoveFullTask={startMoveFullTask}
         styles={colorStyles}
         width={handleWidth * 2}
+        width2={handleWidth2 * 2}
         x={x1}
+        x2={x2}
         y={taskYOffset}
+        y2={taskY2Offset}
       />
 
       {/* right */}

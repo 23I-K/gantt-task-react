@@ -17,8 +17,11 @@ type BarDisplayProps = {
   styles: ColorStyles;
   taskName: string;
   width: number;
+  width2: number;
   x: number;
+  x2: number;
   y: number;
+  y2: number;
 };
 
 export const BarDisplay: React.FC<BarDisplayProps> = ({
@@ -33,8 +36,11 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
   startMoveFullTask,
   styles,
   width,
+  width2,
   x,
+  x2,
   y,
+  y2,
 }) => {
   const processColor = useMemo(() => {
     if (isCritical) {
@@ -114,6 +120,15 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
         }
       }}
     >
+      <rect
+        x={x2}
+        width={width2}
+        y={y2}
+        height={height + 10}
+        ry={barCornerRadius}
+        rx={barCornerRadius}
+        fill={'rgba(227, 210, 192, 1)'}
+      />
       <rect
         x={x}
         width={width}

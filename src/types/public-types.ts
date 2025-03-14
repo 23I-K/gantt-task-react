@@ -145,6 +145,7 @@ export interface Distances {
   dependencyFixWidth: number;
   expandIconWidth: number;
   handleWidth: number;
+  handleWidth2: number;
   headerHeight: number;
   minimumRowDisplayed: number;
   nestedTaskNameOffset: number;
@@ -163,7 +164,9 @@ export interface Task {
   type: TaskType;
   name: string;
   start: Date;
+  start2: Date;
   end: Date;
+  end2: Date;
   /**
    * From 0 to 100
    */
@@ -748,6 +751,10 @@ export type TaskCoordinates = {
    */
   innerX2: number;
   /**
+   * Right border relative to the wrapper svg
+   */
+  innerX2_1: number;
+  /**
    * Top border of inner svg wrapper relative to the root svg
    */
   levelY: number;
@@ -763,6 +770,10 @@ export type TaskCoordinates = {
    * Width of the task
    */
   width: number;
+  /**
+   * Width of the task when second date is provide(planned task date etc.)
+   */
+  width2: number;
   /**
    * Left border of the task relative to the root svg
    */

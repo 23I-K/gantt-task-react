@@ -77,6 +77,7 @@ export type TaskGanttContentProps = {
   setTooltipTask: (task: Task | null, element: Element | null) => void;
   taskToHasDependencyWarningMap: TaskToHasDependencyWarningMap | null;
   taskYOffset: number;
+  taskY2Offset: number;
   visibleTasksMirror: Readonly<Record<string, true>>;
   taskHeight: number;
   taskHalfHeight: number;
@@ -121,6 +122,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   setTooltipTask,
   taskToHasDependencyWarningMap,
   taskYOffset,
+  taskY2Offset,
   taskHeight,
   taskHalfHeight,
   visibleTasksMirror,
@@ -193,7 +195,9 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
         containerWidth,
         innerX1,
         innerX2,
+        innerX2_1,
         width,
+        width2,
         levelY,
         progressWidth,
         x1: taskX1,
@@ -226,9 +230,12 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
             selectTaskOnMouseDown={selectTaskOnMouseDown}
             task={task}
             taskYOffset={taskYOffset}
+            taskY2Offset={taskY2Offset}
             width={width}
+            width2={width2}
             x1={innerX1}
             x2={innerX2}
+            x2_1={innerX2_1}
             childOutOfParentWarnings={childOutOfParentWarnings}
             distances={distances}
             taskHeight={taskHeight}

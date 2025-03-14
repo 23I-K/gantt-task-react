@@ -38,9 +38,12 @@ export type TaskItemProps = {
   selectTaskOnMouseDown: (taskId: string, event: MouseEvent) => void;
   task: Task;
   taskYOffset: number;
+  taskY2Offset: number;
   width: number;
+  width2: number;
   x1: number;
   x2: number;
+  x2_1: number;
   childOutOfParentWarnings: ChildOutOfParentWarnings | null;
   distances: Distances;
   taskHeight: number;
@@ -108,8 +111,10 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
     taskHeight,
     taskYOffset,
     width,
+    width2,
     x1,
     x2,
+    x2_1,
   } = props;
 
   const taskRootRef = useRef<SVGGElement>(null);
@@ -308,6 +313,8 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
       return (
         <Bar
           {...props}
+          x2_1={x2_1}
+          width2={width2}
           onTaskEventStart={onTaskEventStart}
           colorStyles={styles}
         >

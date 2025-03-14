@@ -49,7 +49,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "yarn storybook build",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build_pack": "vite build && tsc & npm pack"
   },
   "dependencies": {
     "@floating-ui/dom": "1.1.1",
