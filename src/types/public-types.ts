@@ -145,6 +145,7 @@ export interface Distances {
   dependencyFixWidth: number;
   expandIconWidth: number;
   handleWidth: number;
+  handleWidth2: number;
   headerHeight: number;
   minimumRowDisplayed: number;
   nestedTaskNameOffset: number;
@@ -163,6 +164,7 @@ export interface Task {
   type: TaskType;
   name: string;
   start: Date;
+  start2: Date;
   end: Date;
   start2?: Date;
   end2?: Date;

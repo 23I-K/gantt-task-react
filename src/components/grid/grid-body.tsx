@@ -17,7 +17,9 @@ export type GridBodyProps = {
   endColumnIndex: number;
   // checkIsHoliday: (date: Date, dateExtremity: DateExtremity) => boolean;
   getDate: (index: number) => Date;
+  get2Date: (index: number) => Date;
   minTaskDate: Date;
+  minTask2Date: Date;
 };
 
 const GridBodyInner: React.FC<GridBodyProps> = ({

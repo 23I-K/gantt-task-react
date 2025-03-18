@@ -15,6 +15,7 @@ export const countTaskCoordinates = (
   taskToRowIndexMap: TaskToRowIndexMap,
   startDate: Date,
   start2Date: Date,
+  start2Date: Date,
   viewMode: ViewMode,
   rtl: boolean,
   fullRowHeight: number,
@@ -68,8 +69,10 @@ export const countTaskCoordinates = (
 
   const taskX1 = type === "milestone" ? x1 - taskHeight * 0.5 : x1;
   const taskX2_1 = type === "milestone" ? x2_1 - taskHeight * 0.5 : x2_1;
+  const taskX2_1 = type === "milestone" ? x2_1 - taskHeight * 0.5 : x2_1;
 
   const taskX2 = type === "milestone" ? x2 + taskHeight * 0.5 : x2;
+  const taskX2_2 = type === "milestone" ? x2_2 + taskHeight * 0.5 : x2_2;
   const taskX2_2 = type === "milestone" ? x2_2 + taskHeight * 0.5 : x2_2;
 
   const taskWidth = type === "milestone" ? taskHeight : taskX2 - taskX1;
@@ -119,6 +122,7 @@ export const getMapTaskToCoordinates = (
   taskToRowIndexMap: TaskToRowIndexMap,
   startDate: Date,
   start2Date: Date,
+  start2Date: Date,
   viewMode: ViewMode,
   rtl: boolean,
   fullRowHeight: number,
@@ -145,6 +149,7 @@ export const getMapTaskToCoordinates = (
       task,
       taskToRowIndexMap,
       startDate,
+      start2Date,
       start2Date,
       viewMode,
       rtl,

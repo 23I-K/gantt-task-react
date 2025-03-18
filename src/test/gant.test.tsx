@@ -10,7 +10,9 @@ describe("gantt", () => {
       tasks={[
         {
           start: new Date(2020, 0, 1),
+          start2: new Date(2020, 0, 2),
           end: new Date(2020, 2, 2),
+          end2: new Date(2020, 2, 3),
           name: "Redesign website",
           id: "Task 0",
           progress: 45,
