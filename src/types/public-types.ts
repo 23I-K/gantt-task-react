@@ -164,6 +164,8 @@ export interface Task {
   name: string;
   start: Date;
   end: Date;
+  start2?: Date;
+  end2?: Date;
   /**
    * From 0 to 100
    */
@@ -736,9 +738,17 @@ export type TaskCoordinates = {
    */
   containerWidth: number;
   /**
+   * Width of inner svg wrapper
+   */
+  containerWidth2: number;
+  /**
    * Left border of inner svg wrapper relative to the root svg
    */
   containerX: number;
+  /**
+   * Left border of inner svg wrapper relative to the root svg
+   */
+  containerX2: number;
   /**
    * Left border relative to the wrapper svg
    */
@@ -748,9 +758,21 @@ export type TaskCoordinates = {
    */
   innerX2: number;
   /**
+   * Left border relative to the wrapper svg
+   */
+  innerX2_1: number;
+  /**
+   * Right border relative to the wrapper svg
+   */
+  innerX2_2: number;
+  /**
    * Top border of inner svg wrapper relative to the root svg
    */
   levelY: number;
+  /**
+   * Top border of inner svg wrapper relative to the root svg
+   */
+  levelY2: number;
   /**
    * Width of the progress bar
    */
@@ -763,6 +785,10 @@ export type TaskCoordinates = {
    * Width of the task
    */
   width: number;
+  /**
+   * Width of the task
+   */
+  width2: number;
   /**
    * Left border of the task relative to the root svg
    */

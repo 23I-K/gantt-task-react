@@ -76,7 +76,6 @@ import { cutOption } from "../../context-menu-options/cut";
 import { pasteOption } from "../../context-menu-options/paste";
 import { deleteOption } from "../../context-menu-options/delete";
 
-import { useHolidays } from "./use-holidays";
 
 import styles from "./gantt.module.css";
 
@@ -430,14 +429,14 @@ export const Gantt: React.FC<GanttProps> = ({
     selectedIdsMirror
   } = useSelection(taskToRowIndexMap, rowIndexToTaskMap, checkTaskIdExists);
 
-  const [startDate, minTaskDate, datesLength] = useMemo(
+  const [startDate, start2Date, minTaskDate, datesLength, dates2Length] = useMemo(
     () => ganttDateRange(visibleTasks, viewMode, preStepsCount),
     [visibleTasks, viewMode, preStepsCount]
   );
 
   const getDate = useCallback(
-    (index: number) => getDateByOffset(startDate, index, viewMode),
-    [startDate, viewMode]
+    (index: number) => getDateByOffset(startDate < start2Date ? startDate : start2Date, index, viewMode),
+    [startDate, start2Date, viewMode]
   );
 
   const dateFormats = useMemo<DateFormats>(
@@ -459,20 +458,26 @@ export const Gantt: React.FC<GanttProps> = ({
     [dateFormats, dateLocale, isUnknownDates, preStepsCount, viewMode]
   );
 
-  const { checkIsHoliday, adjustTaskToWorkingDates } = useHolidays({
-    checkIsHolidayProp,
-    dateSetup,
-    isAdjustToWorkingDates,
-    minTaskDate,
-    roundDate,
-    dateMoveStep
-  });
+  // const { checkIsHoliday, adjustTaskToWorkingDates } = useHolidays({
+  //   checkIsHolidayProp,
+  //   dateSetup,
+  //   isAdjustToWorkingDates,
+  //   minTaskDate,
+  //   roundDate,
+  //   dateMoveStep
+  // });
 
   const svgWidth = useMemo(
     () =>
       Math.max(MINIMUM_DISPLAYED_TIME_UNIT, datesLength) *
       distances.columnWidth,
     [datesLength, distances]
+  );
+  const svg2Width = useMemo(
+    () =>
+      Math.max(MINIMUM_DISPLAYED_TIME_UNIT, dates2Length) *
+      distances.columnWidth,
+    [dates2Length, distances]
   );
   const renderedColumnIndexes = useOptimizedList(
     ganttTaskRootRef,
@@ -488,24 +493,28 @@ export const Gantt: React.FC<GanttProps> = ({
         task,
         taskToRowIndexMap,
         startDate,
+        start2Date,
         viewMode,
         rtl,
         fullRowHeight,
         taskHeight,
         taskYOffset,
         distances,
-        svgWidth
+        svgWidth,
+        svg2Width
       ),
     [
       taskToRowIndexMap,
       startDate,
+      start2Date,
       viewMode,
       rtl,
       fullRowHeight,
       taskHeight,
       taskYOffset,
       distances,
-      svgWidth
+      svgWidth,
+      svg2Width,
     ]
   );
 
@@ -516,13 +525,15 @@ export const Gantt: React.FC<GanttProps> = ({
         visibleTasksMirror,
         taskToRowIndexMap,
         startDate,
+        start2Date,
         viewMode,
         rtl,
         fullRowHeight,
         taskHeight,
         taskYOffset,
         distances,
-        svgWidth
+        svgWidth,
+        svg2Width,
       ),
     [
       distances,
@@ -530,7 +541,9 @@ export const Gantt: React.FC<GanttProps> = ({
       taskToRowIndexMap,
       rtl,
       startDate,
+      start2Date,
       svgWidth,
+      svg2Width,
       taskHeight,
       tasks,
       taskYOffset,
@@ -747,7 +760,7 @@ export const Gantt: React.FC<GanttProps> = ({
   const getMetadata = useCallback(
     (changeAction: ChangeAction) =>
       getChangeTaskMetadata({
-        adjustTaskToWorkingDates,
+        // adjustTaskToWorkingDates,
         changeAction,
         childTasksMap: childTasksMap,
         dependentMap,
@@ -757,7 +770,7 @@ export const Gantt: React.FC<GanttProps> = ({
         tasksMap: tasksMap
       }),
     [
-      adjustTaskToWorkingDates,
+      // adjustTaskToWorkingDates,
       childTasksMap,
       dependentMap,
       isMoveChildsWithParent,
@@ -978,24 +991,24 @@ export const Gantt: React.FC<GanttProps> = ({
 
   const onDateChange = useCallback(
     (action: BarMoveAction, changedTask: Task, originalTask: Task) => {
-      const adjustedTask = adjustTaskToWorkingDates({
-        action,
-        changedTask,
-        originalTask,
-        roundDate
-      });
+      // const adjustedTask = adjustTaskToWorkingDates({
+      //   action,
+      //   changedTask,
+      //   originalTask,
+      //   roundDate
+      // });
 
       const changeAction: ChangeAction =
         action === "move"
           ? {
             type: "change_start_and_end",
-            task: adjustedTask,
+            task: originalTask,
             changedTask,
             originalTask
           }
           : {
             type: "change",
-            task: adjustedTask
+            task: originalTask
           };
 
       const [dependentTasks, taskIndexes, parents, suggestions] =
@@ -1005,7 +1018,7 @@ export const Gantt: React.FC<GanttProps> = ({
 
       if (onDateChangeProp) {
         onDateChangeProp(
-          adjustedTask,
+          originalTask,
           dependentTasks,
           taskIndex,
           parents,
@@ -1015,14 +1028,14 @@ export const Gantt: React.FC<GanttProps> = ({
 
       if (onChangeTasks) {
         const withSuggestions = prepareSuggestions(suggestions);
-        withSuggestions[taskIndex] = adjustedTask;
+        withSuggestions[taskIndex] = originalTask;
         onChangeTasks(withSuggestions, {
           type: "date_change"
         });
       }
     },
     [
-      adjustTaskToWorkingDates,
+      // adjustTaskToWorkingDates,
       getMetadata,
       prepareSuggestions,
       onChangeTasks,
@@ -1644,7 +1657,7 @@ export const Gantt: React.FC<GanttProps> = ({
 
   // Compute the task coordinates used to display the task
   const getTaskCurrentState = useGetTaskCurrentState({
-    adjustTaskToWorkingDates,
+    // adjustTaskToWorkingDates,
     changeInProgress,
     isAdjustToWorkingDates,
     isMoveChildsWithParent,
@@ -1736,7 +1749,7 @@ export const Gantt: React.FC<GanttProps> = ({
     viewMode,
     startColumnIndex,
     endColumnIndex,
-    checkIsHoliday,
+    // checkIsHoliday,
     getDate,
     minTaskDate
   };
@@ -1833,7 +1846,7 @@ export const Gantt: React.FC<GanttProps> = ({
     [
       additionalLeftSpace,
       additionalRightSpace,
-      checkIsHoliday,
+      // checkIsHoliday,
       childOutOfParentWarnings,
       childTasksMap,
       colorStyles,

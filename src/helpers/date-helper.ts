@@ -21,27 +21,39 @@ export const ganttDateRange = (
   tasks: readonly TaskOrEmpty[],
   viewMode: ViewMode,
   preStepsCount: number
-): [Date, Date, number] => {
+): [Date, Date, Date, number, number] => {
   let minTaskDate: Date | null = null;
+  let minTask2Date: Date | null = null;
   let maxTaskDate: Date | null = null;
+  let maxTask2Date: Date | null = null;
   for (const task of tasks) {
     if (task.type !== "empty") {
       if (!minTaskDate || task.start < minTaskDate) {
         minTaskDate = task.start;
       }
+      
+      if (!minTask2Date || task.start2 < minTask2Date) {
+        minTask2Date = task.start2;
+      }
 
       if (!maxTaskDate || task.end > maxTaskDate) {
         maxTaskDate = task.end;
       }
+      
+      if (!maxTask2Date || task.end2 > maxTask2Date) {
+        maxTask2Date = task.end2;
+      }
     }
   }
 
-  if (!minTaskDate || !maxTaskDate) {
-    return [new Date(), new Date(), 2];
+  if (!minTaskDate || !maxTaskDate || !minTask2Date || !maxTask2Date) {
+    return [new Date(), new Date(), new Date(), 2, 2];
   }
 
   let newStartDate: Date | null = null;
+  let newStart2Date: Date | null = null;
   let newEndDate: Date | null = null;
+  let newEnd2Date: Date | null = null;
 
   switch (viewMode) {
     case ViewMode.Year:
@@ -77,8 +89,12 @@ export const ganttDateRange = (
     case ViewMode.Day:
       newStartDate = startOfDay(minTaskDate);
       newStartDate = subDays(newStartDate, preStepsCount);
+      newStart2Date = startOfDay(minTask2Date);
+      newStart2Date = subDays(newStart2Date, preStepsCount);
       newEndDate = startOfDay(maxTaskDate);
       newEndDate = addDays(newEndDate, 30);
+      newEnd2Date = startOfDay(maxTask2Date);
+      newEnd2Date = addDays(newEnd2Date, 30);
       break;
     case ViewMode.QuarterDay:
       newStartDate = startOfDay(minTaskDate);
@@ -102,8 +118,10 @@ export const ganttDateRange = (
 
   return [
     newStartDate,
+    newStart2Date,
     minTaskDate,
     getDatesDiff(newEndDate, newStartDate, viewMode),
+    getDatesDiff(newEnd2Date, newStart2Date, viewMode),
   ];
 };
 

@@ -19,7 +19,7 @@ import type {
 import { roundTaskDates } from "../../helpers/round-task-dates";
 
 type UseGetTaskCurrentStateParams = {
-  adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
+  // adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
   changeInProgress: ChangeInProgress | null;
   isAdjustToWorkingDates: boolean;
   isMoveChildsWithParent: boolean;
@@ -35,7 +35,7 @@ type UseGetTaskCurrentStateParams = {
 };
 
 export const useGetTaskCurrentState = ({
-  adjustTaskToWorkingDates,
+  // adjustTaskToWorkingDates,
   changeInProgress,
   isAdjustToWorkingDates,
   isMoveChildsWithParent,
@@ -74,14 +74,14 @@ export const useGetTaskCurrentState = ({
           const roundTaskIsDifferentFromOriginal =
             roundedTask.start != currentOriginalTask.start ||
             roundedTask.end != currentOriginalTask.end;
-          if (isAdjustToWorkingDates && roundTaskIsDifferentFromOriginal) {
-            return adjustTaskToWorkingDates({
-              action: changeInProgress.action,
-              changedTask: roundedTask,
-              originalTask: currentOriginalTask,
-              roundDate,
-            });
-          }
+          // if (isAdjustToWorkingDates && roundTaskIsDifferentFromOriginal) {
+          //   return adjustTaskToWorkingDates({
+          //     action: changeInProgress.action,
+          //     changedTask: roundedTask,
+          //     originalTask: currentOriginalTask,
+          //     roundDate,
+          //   });
+          // }
 
           return roundedTask;
         }
@@ -114,14 +114,14 @@ export const useGetTaskCurrentState = ({
           const roundTaskIsDifferentFromOriginal =
             roundedTask.start != currentOriginalTask.start ||
             roundedTask.end != currentOriginalTask.end;
-          if (isAdjustToWorkingDates && roundTaskIsDifferentFromOriginal) {
-            return adjustTaskToWorkingDates({
-              action: changeInProgress.action,
-              changedTask: roundedTask,
-              originalTask: currentOriginalTask,
-              roundDate,
-            });
-          }
+          // if (isAdjustToWorkingDates && roundTaskIsDifferentFromOriginal) {
+          //   return adjustTaskToWorkingDates({
+          //     action: changeInProgress.action,
+          //     changedTask: roundedTask,
+          //     originalTask: currentOriginalTask,
+          //     roundDate,
+          //   });
+          // }
 
           return roundedTask;
         }
@@ -185,7 +185,7 @@ export const useGetTaskCurrentState = ({
       return currentOriginalTask;
     },
     [
-      adjustTaskToWorkingDates,
+      // adjustTaskToWorkingDates,
       changeInProgress,
       isAdjustToWorkingDates,
       isMoveChildsWithParent,

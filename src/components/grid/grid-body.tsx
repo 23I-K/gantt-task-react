@@ -15,7 +15,7 @@ export type GridBodyProps = {
   viewMode: ViewMode;
   startColumnIndex: number;
   endColumnIndex: number;
-  checkIsHoliday: (date: Date, dateExtremity: DateExtremity) => boolean;
+  // checkIsHoliday: (date: Date, dateExtremity: DateExtremity) => boolean;
   getDate: (index: number) => Date;
   minTaskDate: Date;
 };

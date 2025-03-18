@@ -13,7 +13,7 @@ export const Grid: React.FC<GridProps> = props => {
     additionalLeftSpace,
     columnWidth,
     getDate,
-    checkIsHoliday,
+    // checkIsHoliday,
     holidayBackgroundColor,
     minTaskDate,
   } = props;
@@ -37,7 +37,7 @@ export const Grid: React.FC<GridProps> = props => {
       return rest === -1 || rest === -2;
     }
 
-    return checkIsHoliday(date, "startOfTask");
+    return false;
   };
 
   const renderedHolidays = useMemo(() => {
@@ -65,7 +65,7 @@ export const Grid: React.FC<GridProps> = props => {
   }, [
     viewMode,
     additionalLeftSpace,
-    checkIsHoliday,
+    // checkIsHoliday,
     columnWidth,
     startColumnIndex,
     endColumnIndex,

@@ -30,5 +30,5 @@ export const defaultCheckIsHoliday = (
     return rest === -1 || rest === -2; 
   }
 
-  return isWeekend(date);
+  return false;
 }

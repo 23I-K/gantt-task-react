@@ -81,7 +81,7 @@ const collectSuggestedParents = (
 };
 
 type GetChangeTaskMetadataParams = {
-  adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
+  // adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
   changeAction: ChangeAction;
   childTasksMap: ChildByLevelMap;
   dependentMap: DependentMap;
@@ -92,7 +92,7 @@ type GetChangeTaskMetadataParams = {
 };
 
 export const getChangeTaskMetadata = ({
-  adjustTaskToWorkingDates,
+  // adjustTaskToWorkingDates,
   changeAction,
   childTasksMap,
   dependentMap,
@@ -122,7 +122,7 @@ export const getChangeTaskMetadata = ({
   const descendantSuggestions =
     changeAction.type === "change_start_and_end"
       ? changeStartAndEndDescendants({
-          adjustTaskToWorkingDates,
+          // adjustTaskToWorkingDates,
           changedTask: changeAction.changedTask,
           descendants,
           mapTaskToGlobalIndex,

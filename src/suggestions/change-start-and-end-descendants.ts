@@ -10,7 +10,7 @@ import type {
 } from "../types/public-types";
 
 type ChangeStartAndEndDescendantsParams = {
-  adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
+  // adjustTaskToWorkingDates: (params: AdjustTaskToWorkingDatesParams) => Task;
   changedTask: Task;
   descendants: readonly TaskOrEmpty[];
   mapTaskToGlobalIndex: TaskToGlobalIndexMap;
@@ -18,7 +18,7 @@ type ChangeStartAndEndDescendantsParams = {
 };
 
 export const changeStartAndEndDescendants = ({
-  adjustTaskToWorkingDates,
+  // adjustTaskToWorkingDates,
   changedTask,
   descendants,
   mapTaskToGlobalIndex,
@@ -52,16 +52,16 @@ export const changeStartAndEndDescendants = ({
     };
 
     // const adjustedTask = preChangedTask;
-    const adjustedTask = adjustTaskToWorkingDates({
-      action: "move",
-      changedTask: preChangedTask,
-      originalTask: task,
-      roundDate: (date: Date) => {
-        return date;
-      },
-    });
+    // const adjustedTask = adjustTaskToWorkingDates({
+    //   action: "move",
+    //   changedTask: preChangedTask,
+    //   originalTask: task,
+    //   roundDate: (date: Date) => {
+    //     return date;
+    //   },
+    // });
 
-    res.push([adjustedTask.start, adjustedTask.end, task, index]);
+    res.push([task.start, task.end, task, index]);
 
     return res;
   }, []);

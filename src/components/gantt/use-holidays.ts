@@ -99,7 +99,7 @@ export const useHolidays = ({
   };
 
   return {
-    checkIsHoliday,
+    checkIsHoliday: () => false,
     adjustTaskToWorkingDates,
   };
 };

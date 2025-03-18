@@ -190,15 +190,78 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
 
       const {
         containerX,
+        containerX2,
         containerWidth,
+        containerWidth2,
         innerX1,
+        innerX2_1,
         innerX2,
+        innerX2_2,
         width,
+        width2,
         levelY,
+        levelY2,
         progressWidth,
         x1: taskX1,
         x2: taskX2,
       } = getTaskCoordinates(task);
+      
+      if (task.start2 && task.end2) {
+        tasksRes.push(
+          <svg
+            id={task.id + 'secondDate'}
+            className="TaskItemClassName"
+            x={(containerX2) + (additionalLeftSpace || 0)}
+            y={levelY2 + 10}
+            width={containerWidth2}
+            height={fullRowHeight}
+            key={key}
+          >
+            <TaskItem
+              getTaskGlobalIndexByRef={getTaskGlobalIndexByRef}
+              hasChildren={checkHasChildren(task, childTasksMap)}
+              hasDependencyWarning={
+                taskToHasDependencyWarningMap
+                  ? checkTaskHasDependencyWarning(
+                      task,
+                      taskToHasDependencyWarningMap
+                    )
+                  : false
+              }
+              progressWidth={0}
+              progressX={rtl ? innerX2_2 : innerX2_1}
+              selectTaskOnMouseDown={selectTaskOnMouseDown}
+              task={task}
+              taskYOffset={taskYOffset}
+              width={width2}
+              x1={innerX2_1}
+              x2={innerX2_2}
+              childOutOfParentWarnings={childOutOfParentWarnings}
+              distances={distances}
+              taskHeight={taskHeight}
+              taskHalfHeight={taskHalfHeight}
+              isProgressChangeable={!task.isDisabled}
+              isDateChangeable={!task.isDisabled}
+              isRelationChangeable={!task.isRelationDisabled}
+              authorizedRelations={authorizedRelations}
+              ganttRelationEvent={ganttRelationEvent}
+              isDelete={!task.isDisabled}
+              onDoubleClick={onDoubleClick}
+              onClick={onClick}
+              onEventStart={handleTaskDragStart}
+              setTooltipTask={setTooltipTask}
+              onRelationStart={handleBarRelationStart}
+              isSelected={Boolean(selectedIdsMirror[taskId])}
+              isCritical={isCritical}
+              rtl={rtl}
+              fixStartPosition={fixStartPosition}
+              fixEndPosition={fixEndPosition}
+              handleDeleteTasks={handleDeleteTasks}
+              colorStyles={{...colorStyles, barBackgroundColor: 'red'}}
+            />
+          </svg>
+        );
+      }
 
       tasksRes.push(
         <svg
