@@ -10,6 +10,8 @@ import {
 
 import { progressWithByParams, taskXCoordinate } from "./bar-helper";
 
+const taskYCoordinates: [{ taskId: string, levelY: number, y: number }] = [{ taskId: '', levelY: 0, y: 0 }];
+
 export const countTaskCoordinates = (
   task: Task,
   taskToRowIndexMap: TaskToRowIndexMap,
@@ -20,7 +22,7 @@ export const countTaskCoordinates = (
   taskHeight: number,
   taskYOffset: number,
   distances: Distances,
-  svgWidth: number
+  svgWidth: number,
 ): TaskCoordinates => {
   const { columnWidth, rowHeight } = distances;
 
@@ -46,9 +48,18 @@ export const countTaskCoordinates = (
     ? svgWidth - taskXCoordinate(task.start, startDate, viewMode, columnWidth)
     : taskXCoordinate(task.end, startDate, viewMode, columnWidth);
 
-  const levelY = rowIndex * fullRowHeight + rowHeight * (comparisonLevel - 1);
+  let levelY = 0;
+  let y = 0;
 
-  const y = levelY + taskYOffset;
+  if (!task.virtual) {
+    levelY = rowIndex * fullRowHeight + rowHeight * (comparisonLevel - 1);
+    y = levelY + taskYOffset;
+    taskYCoordinates.push({ taskId: task.id, levelY, y })
+  } else {
+    const findTask = taskYCoordinates.find((value) => value.taskId + 'fact' === task.id);
+    levelY = findTask?.levelY ?? 0;
+    y = findTask?.y ?? 0;
+  }
 
   const [progressWidth, progressX] =
     type === "milestone"
