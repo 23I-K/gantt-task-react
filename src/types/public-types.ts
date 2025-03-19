@@ -181,6 +181,9 @@ export interface Task {
   displayOrder?: number;
   comparisonLevel?: number;
   virtual?: boolean;
+  sizes?: {
+    additionalHeight?: number;
+  }
 }
 
 export interface EmptyTask {

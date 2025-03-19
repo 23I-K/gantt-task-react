@@ -10,7 +10,7 @@ import {
 
 import { progressWithByParams, taskXCoordinate } from "./bar-helper";
 
-const taskYCoordinates: [{ taskId: string, levelY: number, y: number }] = [{ taskId: '', levelY: 0, y: 0 }];
+const taskYCoordinates: { taskId: string, levelY: number, y: number }[] = [{ taskId: '', levelY: 0, y: 0 }];
 
 export const countTaskCoordinates = (
   task: Task,
@@ -54,7 +54,15 @@ export const countTaskCoordinates = (
   if (!task.virtual) {
     levelY = rowIndex * fullRowHeight + rowHeight * (comparisonLevel - 1);
     y = levelY + taskYOffset;
-    taskYCoordinates.push({ taskId: task.id, levelY, y })
+
+    const indexOfExisted = taskYCoordinates.findIndex((value) => value.taskId === task.id)
+
+    if (indexOfExisted + 1) {
+      taskYCoordinates.filter((value) => value.taskId === task.id)
+      taskYCoordinates[indexOfExisted] = { taskId: task.id, levelY, y };
+    } else {
+      taskYCoordinates.push({ taskId: task.id, levelY, y })
+    }
   } else {
     const findTask = taskYCoordinates.find((value) => value.taskId + 'fact' === task.id);
     levelY = findTask?.levelY ?? 0;
