@@ -360,6 +360,8 @@ export const Gantt: React.FC<GanttProps> = ({
     distances.rowHeight
   );
 
+  if (renderedRowIndexes) renderedRowIndexes[1] = tasks.length;
+
   const colorStyles = useMemo<ColorStyles>(
     () => ({
       ...defaultColors,
@@ -387,12 +389,12 @@ export const Gantt: React.FC<GanttProps> = ({
     let maxLength = 0;
     const countByLevel: Record<string, number> = {};
 
-    visibleTasks.forEach(({ comparisonLevel = 1 }) => {
+    visibleTasks.forEach(({ comparisonLevel = 1, virtual }) => {
       if (!countByLevel[comparisonLevel]) {
         countByLevel[comparisonLevel] = 0;
       }
 
-      ++countByLevel[comparisonLevel];
+      if (!virtual) ++countByLevel[comparisonLevel];
 
       if (
         comparisonLevel <= comparisonLevels &&
