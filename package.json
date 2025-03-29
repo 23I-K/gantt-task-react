@@ -1,6 +1,6 @@
 {
   "name": "@wamra/gantt-task-react",
-  "version": "0.6.17",
+  "version": "0.6.19",
   "description": "Interactive Gantt Chart for React with TypeScript",
   "author": "WAMRA <wamra@users.noreply.github.com>",
   "homepage": "https://github.com/wamra/gantt-task-react/blob/main/README.md#gantt-task-react",
@@ -50,7 +50,7 @@
     "predeploy": "yarn storybook build",
     "deploy-storybook": "gh-pages -d storybook-static",
     "build-storybook": "storybook build",
-    "build-pack": "vite build && tsc && pack" 
+    "build-pack": "vite build && tsc && pack"
   },
   "dependencies": {
     "@floating-ui/dom": "1.1.1",
