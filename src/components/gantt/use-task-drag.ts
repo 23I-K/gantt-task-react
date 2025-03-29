@@ -612,7 +612,7 @@ export const useTaskDrag = ({
     };
 
     svgNode.addEventListener("mousemove", handleMouseMove);
-    svgNode.addEventListener("touchmove", handleTouchMove);
+    svgNode.addEventListener("touchmove", handleTouchMove, { passive: true });
     svgNode.addEventListener("mouseup", handleUp);
     svgNode.addEventListener("touchend", handleUp);
 
