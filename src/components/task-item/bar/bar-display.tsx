@@ -115,8 +115,8 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
       }}
     >
       <rect
-        x={x}
-        width={width}
+        x={isNaN(x) ? 0 : x}
+        width={isNaN(width) ? 0 : width}
         y={y}
         height={height}
         ry={barCornerRadius}
@@ -126,7 +126,7 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
       />
       <rect
         x={progressX}
-        width={progressWidth}
+        width={isNaN(progressWidth) ? 0 : progressWidth}
         y={y}
         height={height}
         ry={barCornerRadius}

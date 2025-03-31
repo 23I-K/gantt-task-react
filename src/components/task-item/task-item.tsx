@@ -383,7 +383,8 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
       ref={taskRootRef}
     >
       {taskItem}
-      <text
+      {x ? (
+        <text
         fill={barLabelFill}
         x={x}
         y={taskYOffset + taskHeight * 0.5}
@@ -396,7 +397,7 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
       >
         {task.name}
       </text>
-
+      ) : null}
       {(outOfParentWarnings || hasDependencyWarning) && (
         <TaskWarning
           taskHalfHeight={taskHalfHeight}

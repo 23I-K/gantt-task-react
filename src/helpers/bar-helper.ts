@@ -18,7 +18,7 @@ export const taskXCoordinate = (
   const currentDate = getDateByOffset(startDate, index, viewMode);
   const nextDate = getDateByOffset(startDate, index + 1, viewMode);
 
-  const remainderMillis = xDate.getTime() - currentDate.getTime();
+  const remainderMillis = xDate?.getTime() - currentDate?.getTime();
   const percentOfInterval =
     remainderMillis / (nextDate.getTime() - currentDate.getTime());
   const x = index * columnWidth + percentOfInterval * columnWidth;

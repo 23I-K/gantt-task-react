@@ -204,9 +204,9 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
         <svg
           id={task.id}
           className="TaskItemClassName"
-          x={containerX + (additionalLeftSpace || 0)}
+          x={isNaN(containerX) ? 0 : containerX + (additionalLeftSpace || 0)}
           y={task?.sizes?.additionalHeight ? levelY - (task?.sizes?.additionalHeight / 2) : levelY}
-          width={containerWidth}
+          width={isNaN(containerWidth) ? 0 : containerWidth}
           height={fullRowHeight}
           key={key}
         >
@@ -226,7 +226,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
             selectTaskOnMouseDown={selectTaskOnMouseDown}
             task={task}
             taskYOffset={taskYOffset}
-            width={width}
+            width={isNaN(width) ? 0 : width}
             x1={innerX1}
             x2={innerX2}
             childOutOfParentWarnings={childOutOfParentWarnings}

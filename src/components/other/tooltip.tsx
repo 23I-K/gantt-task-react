@@ -63,6 +63,8 @@ export const StandardTooltipContent: React.FC<{
     fontFamily,
   };
 
+  if (!task.start || !task.end) return null;
+
   return (
     <div
       className={styles.tooltipDefaultContainer}
@@ -70,14 +72,14 @@ export const StandardTooltipContent: React.FC<{
     >
       <b style={{ fontSize: fontSize + 6 }}>{`${
         task.name
-      }: ${task.start.getDate()}-${
+      }: ${task.start?.getDate()}-${
         task.start.getMonth() + 1
-      }-${task.start.getFullYear()} - ${task.end.getDate()}-${
-        task.end.getMonth() + 1
-      }-${task.end.getFullYear()}`}</b>
-      {task.end.getTime() - task.start.getTime() !== 0 && (
+      }-${task.start?.getFullYear()} - ${task.end?.getDate()}-${
+        task.end?.getMonth() + 1
+      }-${task.end?.getFullYear()}`}</b>
+      {task.end?.getTime() - task.start?.getTime() !== 0 && (
         <p className={styles.tooltipDefaultContainerParagraph}>{`Duration: ${~~(
-          (task.end.getTime() - task.start.getTime()) /
+          (task.end?.getTime() - task.start?.getTime()) /
           (1000 * 60 * 60 * 24)
         )} day(s)`}</p>
       )}
