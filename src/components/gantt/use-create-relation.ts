@@ -221,7 +221,7 @@ export const useCreateRelation = ({
     };
 
     svgNode.addEventListener("mousemove", handleMouseMove);
-    svgNode.addEventListener("touchmove", handleTouchMove);
+    svgNode.addEventListener("touchmove", handleTouchMove, { passive: true });
     svgNode.addEventListener("mouseup", handleMouseUp);
     svgNode.addEventListener("touchend", handleTouchEnd);
 
