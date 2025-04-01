@@ -4,6 +4,7 @@ import type { Locale as DateLocale } from "date-fns";
 
 import { OptimizedListParams } from "../helpers/use-optimized-list";
 import { TaskListHeaderActionsProps } from "../components/task-list/TaskListHeaderActions";
+import { Property } from "csstype";
 
 export enum ViewMode {
   Hour = "Hour",
@@ -111,6 +112,8 @@ export interface ColorStyles {
   contextMenuBoxShadow: string;
   contextMenuBgColor: string;
   contextMenuTextColor: string;
+  stroke?: Property.Stroke | undefined;
+  strokeWidth?: Property.StrokeWidth | undefined;
 }
 
 /**

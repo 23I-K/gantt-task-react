@@ -123,6 +123,7 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
         rx={barCornerRadius}
         fill={barColor}
         className={style.barBackground}
+        style={{ stroke: styles.stroke, strokeWidth: styles.strokeWidth }}
       />
       <rect
         x={progressX}
