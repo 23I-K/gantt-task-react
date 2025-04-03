@@ -81,7 +81,7 @@ export const StandardTooltipContent: React.FC<{
         <p className={styles.tooltipDefaultContainerParagraph}>{`Продолжительность: ${~~(
           (task.end?.getTime() - task.start?.getTime()) /
           (1000 * 60 * 60 * 24)
-        )} день(-ей)`}</p>
+        )} ${createLabel((task.end?.getTime() - task.start?.getTime()) / (1000 * 60 * 60 * 24), ['День', 'Дня', 'Дней'])}`}</p>
       )}
 
       <p className={styles.tooltipDefaultContainerParagraph}>
@@ -90,3 +90,9 @@ export const StandardTooltipContent: React.FC<{
     </div>
   );
 };
+
+
+function createLabel(number: number, titles: string[]): string {
+  const cases = [2, 0, 1, 1, 1, 2];
+  return `${titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[number % 10 < 5 ? number % 10 : 5]]}`;
+}
