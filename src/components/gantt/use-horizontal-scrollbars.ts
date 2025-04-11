@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import type { RefObject, SyntheticEvent } from "react";
 
 import { SCROLL_STEP } from "../../constants";
+import { GANTT_TASK_ROOT_ID } from "./task-gantt";
 
 export const useHorizontalScrollbars = (): [
   RefObject<HTMLDivElement>,
@@ -12,13 +13,11 @@ export const useHorizontalScrollbars = (): [
   () => void
 ] => {
   const [scrollX, setScrollX] = useState(0);
-
-  const ganttTaskRootRef = useRef<HTMLDivElement>(null);
-
   const isLockedRef = useRef(false);
+  const ganttTaskRootRef = useRef<HTMLDivElement>(null);
+  const scrollEl = ganttTaskRootRef.current ?? document.getElementById(GANTT_TASK_ROOT_ID);
 
   const setScrollXProgrammatically = useCallback((nextScrollX: number) => {
-    const scrollEl = ganttTaskRootRef.current;
 
     if (!scrollEl) {
       return;
@@ -26,8 +25,8 @@ export const useHorizontalScrollbars = (): [
 
     isLockedRef.current = true;
 
-    if (ganttTaskRootRef.current) {
-      ganttTaskRootRef.current.scrollLeft = nextScrollX;
+    if (scrollEl) {
+      scrollEl.scrollLeft = nextScrollX;
     }
 
     setScrollX(scrollEl.scrollLeft);
@@ -35,7 +34,7 @@ export const useHorizontalScrollbars = (): [
     setTimeout(() => {
       isLockedRef.current = false;
     }, 300);
-  }, []);
+  }, [scrollEl]);
 
   const onVerticalScrollbarScrollX = useCallback(
     (event: SyntheticEvent<HTMLDivElement>) => {
@@ -45,13 +44,13 @@ export const useHorizontalScrollbars = (): [
 
       const nextScrollX = event.currentTarget.scrollLeft;
 
-      if (ganttTaskRootRef.current) {
-        ganttTaskRootRef.current.scrollLeft = nextScrollX;
+      if (scrollEl) {
+        scrollEl.scrollLeft = nextScrollX;
       }
 
       setScrollX(nextScrollX);
     },
-    []
+    [scrollEl]
   );
 
   const scrollToLeftStep = useCallback(() => {

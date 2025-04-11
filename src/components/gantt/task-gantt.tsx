@@ -16,6 +16,8 @@ import {
 } from "../../types/public-types";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
+export const GANTT_TASK_ROOT_ID = 'GANTT_TASK_ROOT_ID';
+
 export type TaskGanttProps = {
   barProps: TaskGanttContentProps;
   calendarProps: CalendarProps;
@@ -186,6 +188,7 @@ const TaskGanttInner: React.FC<TaskGanttProps> = (props) => {
       ref={ganttTaskRootRef}
       onScroll={onVerticalScrollbarScrollX}
       dir="ltr"
+      id={GANTT_TASK_ROOT_ID}
     >
       <Calendar {...calendarProps} colors={colors} />
       <div

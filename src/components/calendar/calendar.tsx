@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, { useCallback, useEffect } from "react";
 import type { ReactNode } from "react";
 
 import {
@@ -14,6 +14,7 @@ import { defaultRenderBottomHeader } from "./default-render-bottom-header";
 import { defaultRenderTopHeader } from "./default-render-top-header";
 
 import styles from "./calendar.module.css";
+import { useHorizontalScrollbars } from "../gantt/use-horizontal-scrollbars";
 
 export type CalendarProps = {
   additionalLeftSpace: number;
@@ -50,6 +51,8 @@ export const Calendar: React.FC<CalendarProps> = ({
   startColumnIndex,
   colors
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_,__,setScrollXProgrammatically] = useHorizontalScrollbars();
   const renderBottomHeaderByDate = useCallback(
     (date: Date, index: number) =>
       renderBottomHeader(
@@ -66,6 +69,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     (date: Date) => renderTopHeader(date, dateSetup.viewMode, dateSetup),
     [renderTopHeader, dateSetup]
   );
+
+  useEffect(() => setScrollXProgrammatically(0), [dateSetup.viewMode, setScrollXProgrammatically])
 
   const getCalendarValuesForYear = () => {
     const topValues: ReactNode[] = [];
