@@ -187,6 +187,7 @@ export interface Task {
   sizes?: {
     additionalHeight?: number;
   }
+  prefix?: string;
 }
 
 export interface EmptyTask {

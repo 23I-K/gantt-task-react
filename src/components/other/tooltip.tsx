@@ -65,13 +65,15 @@ export const StandardTooltipContent: React.FC<{
 
   if (!task.start || !task.end) return null;
 
+  const taskPrefix = task?.prefix ?? '';
+
   return (
     <div
       className={styles.tooltipDefaultContainer}
       style={style}
     >
       <b style={{ fontSize: fontSize + 6 }}>{`${
-        task.name
+        taskPrefix + ' ' + task.name
       }: ${task.start?.getDate()}-${
         task.start.getMonth() + 1
       }-${task.start?.getFullYear()} - ${task.end?.getDate()}-${

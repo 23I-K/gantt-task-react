@@ -89,7 +89,7 @@ export const defaultRenderBottomHeader = (
       }
 
     case ViewMode.Week:
-      return `W${getWeekNumberISO8601(date)}`;
+      return `Н${getWeekNumberISO8601(date)}`;
 
     case ViewMode.Day:
     case ViewMode.TwoDays:
