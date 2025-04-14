@@ -383,20 +383,27 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
       ref={taskRootRef}
     >
       {taskItem}
-      {x ? (
+      {task.virtual && !isTextInside ? (
         <text
-        fill={barLabelFill}
-        x={x}
-        y={taskYOffset + taskHeight * 0.5}
-        className={
-          isTextInside
-            ? style.barLabel
-            : style.barLabel && style.barLabelOutside
-        }
-        ref={textRef}
-      >
-        {task.name}
-      </text>
+          fill='transparent'
+          x={x}
+          y={taskYOffset + taskHeight * 0.5}
+          ref={textRef}
+        >{task.name}</text>
+      ) : x ? (
+        <text
+          fill={barLabelFill}
+          x={x}
+          y={taskYOffset + taskHeight * 0.5}
+          className={
+            isTextInside
+              ? style.barLabel
+              : style.barLabel && style.barLabelOutside
+          }
+          ref={textRef}
+        >
+          {task.name}
+        </text>
       ) : null}
       {(outOfParentWarnings || hasDependencyWarning) && (
         <TaskWarning
