@@ -1,11 +1,12 @@
 import {
-  BarMoveAction,
+  BarMoveAction, Distances,
   Task,
   TaskCoordinates,
   ViewMode,
 } from "../types/public-types";
 import { getDatesDiff } from "./get-dates-diff";
 import { getDateByOffset } from "./get-date-by-offset";
+import { getIsSmallBar } from "../components/task-item/task-item";
 
 export const taskXCoordinate = (
   xDate: Date,
@@ -29,9 +30,12 @@ export const progressWithByParams = (
   taskX1: number,
   taskX2: number,
   progress: number,
-  rtl: boolean
+  rtl: boolean,
+  distances: Distances,
 ): [number, number] => {
-  const progressWidth = (taskX2 - taskX1) * progress * 0.01;
+  const width = taskX2 - taskX1;
+  const isSmallBar = getIsSmallBar(width, distances.defaultWidth);
+  const progressWidth = (isSmallBar ? distances.defaultWidth : taskX2 - taskX1) * progress * 0.01;
   let progressX: number;
   if (rtl) {
     progressX = taskX2 - progressWidth;

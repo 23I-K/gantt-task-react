@@ -148,6 +148,7 @@ export interface Distances {
   dependencyFixWidth: number;
   expandIconWidth: number;
   handleWidth: number;
+  defaultWidth: number;
   headerHeight: number;
   minimumRowDisplayed: number;
   nestedTaskNameOffset: number;

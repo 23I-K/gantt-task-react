@@ -14,7 +14,7 @@ export const BarSmall: React.FC<
 > = ({
   children: relationhandles,
   colorStyles,
-  distances: { barCornerRadius, handleWidth },
+  distances: { barCornerRadius, defaultWidth, handleWidth },
   hasChildren,
   isSelected,
   isCritical,
@@ -57,7 +57,7 @@ export const BarSmall: React.FC<
         progressX={progressX}
         startMoveFullTask={startMoveFullTask}
         styles={colorStyles}
-        width={handleWidth * 2}
+        width={defaultWidth}
         x={x1}
         y={taskYOffset}
       />

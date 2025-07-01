@@ -72,7 +72,7 @@ export const countTaskCoordinates = (
   const [progressWidth, progressX] =
     type === "milestone"
       ? [0, x1]
-      : progressWithByParams(x1, x2, progress, rtl);
+      : progressWithByParams(x1, x2, progress, rtl, distances);
 
   const taskX1 = type === "milestone" ? x1 - taskHeight * 0.5 : x1;
 

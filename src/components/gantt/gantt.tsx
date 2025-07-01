@@ -134,6 +134,8 @@ const defaultDateFormats: DateFormats = {
   monthTopHeaderFormat: "LLLL"
 };
 
+const handleWidth = 8;
+
 const defaultDistances: Distances = {
   actionColumnWidth: 40,
   arrowIndent: 20,
@@ -149,7 +151,8 @@ const defaultDistances: Distances = {
   dependencyFixIndent: 50,
   dependencyFixWidth: 20,
   expandIconWidth: 20,
-  handleWidth: 8,
+  handleWidth,
+  defaultWidth: handleWidth * 2,
   headerHeight: 50,
   minimumRowDisplayed: 4,
   nestedTaskNameOffset: 20,

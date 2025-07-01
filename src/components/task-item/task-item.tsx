@@ -70,6 +70,8 @@ export type TaskItemProps = {
   colorStyles: ColorStyles;
 };
 
+export const getIsSmallBar = (width: number, defaultWidth: number) => width < defaultWidth;
+
 const TaskItemInner: React.FC<TaskItemProps> = props => {
   const {
     childOutOfParentWarnings,
@@ -77,7 +79,7 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
 
     distances: {
       arrowIndent,
-      handleWidth,
+      defaultWidth,
       taskWarningOffset,
       relationCircleOffset,
       relationCircleRadius,
@@ -252,7 +254,8 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
         ? isFromStartRelationAuthorized
         : isFromEndRelationAuthorized;
     }
-    const isSmallBar = width < handleWidth * 2;
+
+    const isSmallBar = getIsSmallBar(width, defaultWidth);
     const relationhandles = (
       <>
         {/* left */}
@@ -274,7 +277,7 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
             x={
               !isSmallBar
                 ? x2 + relationCircleOffset
-                : x1 + 2 * handleWidth + relationCircleOffset
+                : x1 + defaultWidth + relationCircleOffset
             }
             y={taskYOffset + taskHalfHeight}
             radius={relationCircleRadius}
@@ -315,7 +318,7 @@ const TaskItemInner: React.FC<TaskItemProps> = props => {
         </Bar>
       );
   }, [
-    handleWidth,
+    defaultWidth,
     isSelected,
     outOfParentWarnings,
     props,
