@@ -1,6 +1,6 @@
 {
   "name": "@prostokurtki/gantt-task-react",
-  "version": "0.6.27",
+  "version": "0.6.28",
   "description": "Interactive Gantt Chart for React with TypeScript",
   "author": "prostokurtki@gmail.com",
   "homepage": "https://github.com/23I-K/gantt-task-react",

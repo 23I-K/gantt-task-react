@@ -197,7 +197,7 @@ const TaskGanttInner: React.FC<TaskGanttProps> = (props) => {
         style={containerStyle}
         onScroll={onScrollVertically}
       >
-        <div style={gridStyle}>
+        <div style={gridStyle} className='gantt-task-track'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={fullSvgWidth}
